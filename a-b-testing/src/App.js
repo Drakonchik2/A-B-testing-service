@@ -1,11 +1,20 @@
-import './App.css';
-import AddForm from './Offers_page/Add'
-function App() {
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import { ThemeProvider } from '@material-ui/core';
+import GlobalStyles from 'src/components/GlobalStyles';
+import 'src/mixins/chartjs';
+import theme from 'src/theme';
+import Login from 'src/pages/Login';
+import MainLayout from 'src/components/MainLayout';
+
+const App = () => {
+  
   return (
-    <div classname="App">
-      <AddForm />
-      </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <Login />
+      <MainLayout />
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
