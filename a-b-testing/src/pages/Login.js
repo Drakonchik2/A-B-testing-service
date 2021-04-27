@@ -9,9 +9,12 @@ import {
   TextField,
   Typography
 } from '@material-ui/core';
+import {authorisation} from 'src/actions/user';
+import { useDispatch } from 'react-redux';
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -37,8 +40,9 @@ const Login = () => {
               email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
               password: Yup.string().max(255).required('Password is required')
             })}
-            onSubmit={() => {
-              navigate('#', { replace: true });
+            onSubmit={(values) => {
+              dispatch(authorisation(values.email, values.password));
+              navigate('../customers', { replace: true });
             }}
           >
             {({
@@ -103,7 +107,6 @@ const Login = () => {
                 <Box sx={{ py: 2 }}>
                   <Button
                     color="primary"
-                    disabled={isSubmitting}
                     fullWidth
                     size="large"
                     type="submit"
