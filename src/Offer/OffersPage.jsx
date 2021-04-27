@@ -1,4 +1,5 @@
 import OfferListResult from './OffersListResult';
+import OffersListToolbar from './OffersListToolbar';
 import offers from './offers';
 import {Box, Container} from '@material-ui/core';
 const OffersPage = () => (
@@ -10,6 +11,7 @@ const OffersPage = () => (
  }}
  >
    <Container maxWidth={false}>
+     <OffersListToolbar/>
      <OfferListResult offerlist={offers}/>
    </Container>
  </Box>

@@ -1,78 +1,89 @@
-import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import React, { useState, useEffect } from "react";
+import {Button, TextField, Box, Typography } from '@material-ui/core';
 
 
-const signInSchema = Yup.object().shape({
-  email: Yup.string().email().required("Email is required"),
-  password: Yup.string()
-    .required("Password is required")
-    .min(4, "Password is too short - should be 4 chars min")
-});
 
-const initialValues = {
-  email: "",
-  password: ""
-};
+const AddForm = () => {
+  const intialValues = { name: "", link: "" };
 
-const AddOffer= () => {
+  const [formValues, setFormValues] = useState(intialValues);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const submit = () => {
+    console.log(formValues);
+  };
+
+  //input change handler
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  //form submission handler
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormErrors(validate(formValues));
+    setIsSubmitting(true);
+  };
+
+  //form validation handler
+  const validate = (values) => {
+    let errors = {};
+
+    if (!values.name) {
+      errors.name = "Cannot be blank";
+    }
+
+    if (!values.link) {
+      errors.link = "Cannot be blank";
+    } 
+
+    return errors;
+  };
+
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isSubmitting) {
+      submit();
+    }
+  }, [formErrors]);
+
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={signInSchema}
-      onSubmit={(values) => {
-        console.log(values);
-      }}
-    >
-      {(formik) => {
-        const { errors, touched, isValid, dirty } = formik;
-        return (
-          <div className="container">
-            <h1>Sign in to continue</h1>
-            <Form>
-              <div className="form-row">
-                <label htmlFor="email">Email</label>
-                <Field
-                  type="email"
-                  name="email"
-                  id="email"
-                  className={
-                    errors.email && touched.email ? "input-error" : null
-                  }
-                />
-                <ErrorMessage name="email" component="span" className="error" />
-              </div>
-
-              <div className="form-row">
-                <label htmlFor="password">Password</label>
-                <Field
-                  type="password"
-                  name="password"
-                  id="password"
-                  className={
-                    errors.password && touched.password ? "input-error" : null
-                  }
-                />
-                <ErrorMessage
-                  name="password"
-                  component="span"
-                  className="error"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className={!(dirty && isValid) ? "disabled-btn" : ""}
-                disabled={!(dirty && isValid)}
-              >
-                Sign In
-              </button>
-            </Form>
-          </div>
-        );
-      }}
-    </Formik>
+      <Box 
+      component="div"
+      align='center'
+      >
+      <Typography 
+      color='textPrimary'
+      variant='body1'
+      
+      >
+        Add new offer
+      </Typography>
+      <form onSubmit={handleSubmit} noValidate>
+        <div className="form-row">
+          <TextField 
+          variant="outlined"
+          id="name" 
+          label="Offer Name"
+          />
+          
+        </div>
+        <div className="form-row">
+          <TextField
+          variant="outlined"
+          id="link"
+          label="Offer Link"
+          />
+        </div>
+        <div>
+          <Button variant="contained" color="primary" href="/offer">
+            Submit
+          </Button>
+        </div>
+      </form>
+      </Box>
   );
 };
 
-export default AddOffer;
+export default AddForm;

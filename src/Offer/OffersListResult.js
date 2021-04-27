@@ -1,22 +1,21 @@
 import {
-    Avatar,
     Box,
     Card,
-    Checkbox,
     Table,
     TableBody,
     TableCell,
     TableHead,
-    TablePagination,
     TableRow,
     Typography,
     IconButton,
-    Icon
+
   } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 const limit=10;
+
 const OfferListResult=({offerlist, ...rest})=>{
+
     return(
         <Card {...rest}>
             <Box sx={{minWidth: 1050}}>
@@ -41,7 +40,7 @@ const OfferListResult=({offerlist, ...rest})=>{
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {offerlist.slice(0,limit).map((offerlist)=>(
+                    {offerlist.slice(0,limit).map((offerlist)=>(
                         <TableRow>
                         <TableCell>
                             {offerlist.offerName}
@@ -68,12 +67,13 @@ const OfferListResult=({offerlist, ...rest})=>{
                         >
                             <EditIcon/>
                         </IconButton>
-                        <IconButton color ="primary" aria-label="Delete offer">
+                        <IconButton color ="primary" aria-label="Delete offer" href="#">
                             <DeleteIcon/>
                         </IconButton>
                         </Box>
                         </TableCell>
                         </TableRow>
+
                         ))}
                     </TableBody>
                 </Table>

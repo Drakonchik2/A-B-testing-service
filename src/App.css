@@ -16,9 +16,3 @@ body {
   display: flex;
   justify-content: center;
 }
-input:valid{
-  background-color: #76c893;
-} 
-input:invalid{
-  background-color: #d00000;
-}
