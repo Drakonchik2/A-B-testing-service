@@ -5,7 +5,10 @@ import {
   CardContent,
   TextField,
   InputAdornment,
-  SvgIcon
+  SvgIcon,
+  Select,
+  MenuItem,
+  InputLabel
 } from '@material-ui/core';
 import { Search as SearchIcon } from 'react-feather';
 
@@ -17,40 +20,28 @@ const PrelandListToolbar = (props) => (
         justifyContent: 'flex-end'
       }}
     >
-      <Button>
-        Import
-      </Button>
-      <Button sx={{ mx: 1 }}>
-        Export
-      </Button>
       <Button
         color="primary"
         variant="contained"
       >
-        Add customer
+        Add preland
       </Button>
     </Box>
     <Box sx={{ mt: 3 }}>
       <Card>
         <CardContent>
           <Box sx={{ maxWidth: 500 }}>
-            <TextField
-              fullWidth
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SvgIcon
-                      fontSize="small"
-                      color="action"
-                    >
-                      <SearchIcon />
-                    </SvgIcon>
-                  </InputAdornment>
-                )
-              }}
-              placeholder="Search customer"
-              variant="outlined"
-            />
+            <InputLabel id="label">Filter</InputLabel>
+            <Select
+            autoWidth="true"
+            labelId="label"
+            id="select"
+            >
+              <MenuItem value={1}>This month</MenuItem>
+              <MenuItem value={2}>Today</MenuItem>
+              <MenuItem value={3}>Last week</MenuItem>
+              <MenuItem value={4}>Yesterday</MenuItem>
+            </Select>
           </Box>
         </CardContent>
       </Card>

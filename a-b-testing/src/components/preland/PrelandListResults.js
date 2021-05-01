@@ -13,45 +13,48 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Typography
+  Typography,
+  IconButton
 } from '@material-ui/core';
 import getInitials from 'src/utils/getInitials';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 
-const PrelandListResults = ({ customers, ...rest }) => {
-  const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
+const PrelandListResults = ({ prelands, ...rest }) => {
+  const [selectedPrelandIds, setSelectedPrelandIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
 
   const handleSelectAll = (event) => {
-    let newSelectedCustomerIds;
+    let newSelectedPrelandIds;
 
     if (event.target.checked) {
-      newSelectedCustomerIds = customers.map((customer) => customer.id);
+      newSelectedPrelandIds = prelands.map((preland) => preland.id);
     } else {
-      newSelectedCustomerIds = [];
+      newSelectedPrelandIds = [];
     }
 
-    setSelectedCustomerIds(newSelectedCustomerIds);
+    setSelectedPrelandIds(newSelectedPrelandIds);
   };
 
   const handleSelectOne = (event, id) => {
-    const selectedIndex = selectedCustomerIds.indexOf(id);
-    let newSelectedCustomerIds = [];
+    const selectedIndex = selectedPrelandIds.indexOf(id);
+    let newSelectedPrelandIds = [];
 
     if (selectedIndex === -1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds, id);
+      newSelectedPrelandIds = newSelectedPrelandIds.concat(selectedPrelandIds, id);
     } else if (selectedIndex === 0) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds.slice(1));
-    } else if (selectedIndex === selectedCustomerIds.length - 1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds.slice(0, -1));
+      newSelectedPrelandIds = newSelectedPrelandIds.concat(selectedPrelandIds.slice(1));
+    } else if (selectedIndex === selectedPrelandIds.length - 1) {
+      newSelectedPrelandIds = newSelectedPrelandIds.concat(selectedPrelandIds.slice(0, -1));
     } else if (selectedIndex > 0) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(
-        selectedCustomerIds.slice(0, selectedIndex),
-        selectedCustomerIds.slice(selectedIndex + 1)
+      newSelectedPrelandIds = newSelectedPrelandIds.concat(
+        selectedPrelandIds.slice(0, selectedIndex),
+        selectedPrelandIds.slice(selectedIndex + 1)
       );
     }
 
-    setSelectedCustomerIds(newSelectedCustomerIds);
+    setSelectedPrelandIds(newSelectedPrelandIds);
   };
 
   const handleLimitChange = (event) => {
@@ -69,16 +72,8 @@ const PrelandListResults = ({ customers, ...rest }) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    checked={selectedCustomerIds.length === customers.length}
-                    color="primary"
-                    indeterminate={
-                      selectedCustomerIds.length > 0
-                      && selectedCustomerIds.length < customers.length
-                    }
-                    onChange={handleSelectAll}
-                  />
+                <TableCell>
+                  Active
                 </TableCell>
                 <TableCell>
                   Name
@@ -101,19 +96,23 @@ const PrelandListResults = ({ customers, ...rest }) => {
                 <TableCell>
                   Distribution
                 </TableCell>
+                <TableCell>
+                  Actions
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.slice(0, limit).map((customer) => (
+              {prelands.slice(0, limit).map((preland) => (
                 <TableRow
                   hover
-                  key={customer.id}
-                  selected={selectedCustomerIds.indexOf(customer.id) !== -1}
+                  key={preland.id}
+                  selected={selectedPrelandIds.indexOf(preland.id) !== -1}
                 >
-                  <TableCell padding="checkbox">
+                  <TableCell padding="checkbox" sx={{pl: 2}}>
                     <Checkbox
-                      checked={selectedCustomerIds.indexOf(customer.id) !== -1}
-                      onChange={(event) => handleSelectOne(event, customer.id)}
+                      color="primary"
+                      checked={selectedPrelandIds.indexOf(preland.id) !== -1}
+                      onChange={(event) => handleSelectOne(event, preland.id)}
                       value="true"
                     />
                   </TableCell>
@@ -124,37 +123,39 @@ const PrelandListResults = ({ customers, ...rest }) => {
                         display: 'flex'
                       }}
                     >
-                      <Avatar
-                        src={customer.avatarUrl}
-                        sx={{ mr: 2 }}
-                      >
-                        {getInitials(customer.name)}
-                      </Avatar>
                       <Typography
                         color="textPrimary"
                         variant="body1"
                       >
-                        {customer.name}
+                        {preland.name}
                       </Typography>
                     </Box>
                   </TableCell>
                   <TableCell>
-                    {customer.email}
+                    {preland.showing}
                   </TableCell>
                   <TableCell>
-                    {`${customer.address.city}, ${customer.address.state}, ${customer.address.country}`}
+                    {preland.uniques}
                   </TableCell>
                   <TableCell>
-                    {customer.phone}
+                    {preland.transitions}
                   </TableCell>
                   <TableCell>
-                    {moment(customer.createdAt).format('DD/MM/YYYY')}
+                    {preland.conversion}
                   </TableCell>
                   <TableCell>
-                    {moment(customer.createdAt).format('DD/MM/YYYY')}
+                    {preland.unique}
                   </TableCell>
                   <TableCell>
-                    {moment(customer.createdAt).format('DD/MM/YYYY')}
+                    {preland.distribution}
+                  </TableCell>
+                  <TableCell>
+                  <IconButton color="inherit">
+                      <EditOutlinedIcon color="primary" />
+                    </IconButton>
+                    <IconButton color="inherit">
+                      <DeleteOutlineIcon color="secondary" />
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               ))}
@@ -164,7 +165,7 @@ const PrelandListResults = ({ customers, ...rest }) => {
       </PerfectScrollbar>
       <TablePagination
         component="div"
-        count={customers.length}
+        count={prelands.length}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleLimitChange}
         page={page}
@@ -176,7 +177,7 @@ const PrelandListResults = ({ customers, ...rest }) => {
 };
 
 PrelandListResults.propTypes = {
-  customers: PropTypes.array.isRequired
+  prelands: PropTypes.array.isRequired
 };
 
 export default PrelandListResults;

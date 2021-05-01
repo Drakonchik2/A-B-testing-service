@@ -2,12 +2,12 @@ import { Helmet } from 'react-helmet';
 import { Box, Container } from '@material-ui/core';
 import PrelandListResults from 'src/components/preland/PrelandListResults';
 import PrelandListToolbar from 'src/components/preland/PrelandListToolbar';
-import customers from 'src/__mocks__/customers';
+import prelands from 'src/__mocks__/prelands';
 
 const PrelandList = () => (
   <>
     <Helmet>
-      <title>Customers | Material Kit</title>
+      <title>Prelands</title>
     </Helmet>
     <Box
       sx={{
@@ -19,7 +19,7 @@ const PrelandList = () => (
       <Container maxWidth={false}>
         <PrelandListToolbar />
         <Box sx={{ pt: 3 }}>
-          <PrelandListResults customers={customers} />
+          <PrelandListResults prelands={prelands} />
         </Box>
       </Container>
     </Box>
