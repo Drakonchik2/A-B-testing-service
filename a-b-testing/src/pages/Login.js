@@ -42,7 +42,7 @@ const Login = () => {
             })}
             onSubmit={(values) => {
               dispatch(authorisation(values.email, values.password));
-              navigate('../customers', { replace: true });
+              navigate('./prelands', { replace: true });
             }}
           >
             {({

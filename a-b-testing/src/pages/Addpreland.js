@@ -39,7 +39,7 @@ const Addpreland = () => {
               postback: ''
             }}
             onSubmit={(values) => {
-              navigate('../customers', { replace: true });
+              navigate('../prelands', { replace: true });
             }}
           >
             {({

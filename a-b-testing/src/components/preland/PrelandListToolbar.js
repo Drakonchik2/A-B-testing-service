@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import { Search as SearchIcon } from 'react-feather';
 
+
 const PrelandListToolbar = (props) => (
   <Box {...props}>
     <Box
@@ -23,6 +24,7 @@ const PrelandListToolbar = (props) => (
       <Button
         color="primary"
         variant="contained"
+        href="./addpreland"
       >
         Add preland
       </Button>
