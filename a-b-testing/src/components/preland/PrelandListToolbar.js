@@ -11,9 +11,16 @@ import {
   InputLabel
 } from '@material-ui/core';
 import { Search as SearchIcon } from 'react-feather';
+import {useState} from 'react';
+
+function PrelandListToolbar(props){
+const [type, setType] = useState(1);
+const handleChange = (event) => {
+  setType(event.target.value);
+};
 
 
-const PrelandListToolbar = (props) => (
+return(
   <Box {...props}>
     <Box
       sx={{
@@ -35,9 +42,10 @@ const PrelandListToolbar = (props) => (
           <Box sx={{ maxWidth: 500 }}>
             <InputLabel id="label">Filter</InputLabel>
             <Select
-            autoWidth="true"
             labelId="label"
             id="select"
+            value={type}
+            onChange={handleChange}
             >
               <MenuItem value={1}>This month</MenuItem>
               <MenuItem value={2}>Today</MenuItem>
@@ -50,5 +58,5 @@ const PrelandListToolbar = (props) => (
     </Box>
   </Box>
 );
-
+}
 export default PrelandListToolbar;
