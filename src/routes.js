@@ -5,8 +5,18 @@ import Addpreland from 'src/pages/Addpreland';
 import OffersPage from 'src/pages/OffersPage';
 import EditOffer from 'src/pages/EditOffer';
 import AddOffer from 'src/pages/AddOffer';
+import DashboardLayout from 'src/components/DashboardLayout';
 const routes = [
   {
+    path: 'app',
+    element: <DashboardLayout />,
+    children: [
+      
+
+    ]
+  },
+  {
+
     path: '/',
     element: <MainLayout />,
     children: [

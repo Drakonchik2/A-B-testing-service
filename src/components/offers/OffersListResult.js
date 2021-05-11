@@ -1,3 +1,6 @@
+import {useState} from 'react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+
 import {
     Box,
     Card,
@@ -6,18 +9,28 @@ import {
     TableCell,
     TableHead,
     TableRow,
-    Typography,
     IconButton,
+    Button,
+    TablePagination
 
   } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-const limit=10;
 
 const OfferListResult=({offerlist, ...rest})=>{
+    const [limit, setLimit]=useState(10);
+    const [page,setPage]=useState(0);
+
+    const handleLimitChange=(event)=>{
+        setLimit(event.target.value);
+    };
+    const handlePageChange=(event, newPage)=>{
+        setPage(newPage);
+    };
 
     return(
         <Card {...rest}>
+            <PerfectScrollbar>
             <Box sx={{minWidth: 1050}}>
                 <Table>
                     <TableHead>
@@ -37,6 +50,7 @@ const OfferListResult=({offerlist, ...rest})=>{
                             <TableCell>
                                 Actions
                             </TableCell>
+    
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -70,15 +84,31 @@ const OfferListResult=({offerlist, ...rest})=>{
                         <IconButton color ="primary" aria-label="Delete offer" href="#">
                             <DeleteIcon/>
                         </IconButton>
+                        <Button
+                        
+                        href="/prelands"
+                        >
+                            Prelands
+                        </Button>
                         </Box>
                         </TableCell>
+                        
                         </TableRow>
 
                         ))}
                     </TableBody>
                 </Table>
             </Box>
-
+            </PerfectScrollbar>
+            <TablePagination
+            component="div"
+            count={limit}
+            onPageChange={handlePageChange}
+            onRowsPerPageChange={handleLimitChange}
+            page={page}
+            rowsPerPage={limit}
+            rowsPerPageOptions={[5,10,20]}
+            />
         </Card>
 
     )

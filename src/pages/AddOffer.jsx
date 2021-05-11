@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {Button, TextField, Box, Typography } from '@material-ui/core';
+import typography from 'src/theme/typography';
 
 
 
@@ -52,11 +53,13 @@ const AddOffer = () => {
       <Box 
       component="div"
       align='center'
+      sx={{
+        py:3
+      }}
       >
       <Typography 
       color='textPrimary'
-      variant='body1'
-      
+      variant='h3'
       >
         Add new offer
       </Typography>
@@ -66,6 +69,9 @@ const AddOffer = () => {
           variant="outlined"
           id="name" 
           label="Offer Name"
+          sx={{
+            my:1
+          }}
           />
           
         </div>
@@ -74,6 +80,9 @@ const AddOffer = () => {
           variant="outlined"
           id="link"
           label="Offer Link"
+          sx={{
+            my:1
+          }}
           />
         </div>
         <div>

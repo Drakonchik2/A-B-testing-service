@@ -53,10 +53,13 @@ const EditOffer = () => {
     <Box 
     component="div"
     align='center'
+    sx={{
+      py:3
+    }}
     >
     <Typography 
     color='textPrimary'
-    variant='body1'
+    variant='h3'
     
     >
       Edit offer
@@ -67,6 +70,9 @@ const EditOffer = () => {
           variant="outlined"
           id="name" 
           label="Offer Name"
+          sx={{
+            my:1
+          }}
           />
           
         </div>
@@ -75,6 +81,9 @@ const EditOffer = () => {
           variant="outlined"
           id="link"
           label="Offer Link"
+          sx={{
+            my:1
+          }}
           />
         </div>
         <div>

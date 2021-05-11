@@ -1,7 +1,12 @@
-import OfferListResult from 'src/__mocks__/OffersListResult';
-import OffersListToolbar from 'src/__mocks__/OffersListToolbar';
+import OfferListResult from 'src/components/offers/OffersListResult';
+import OffersListToolbar from 'src/components/offers/OffersListToolbar';
 import offers from 'src/__mocks__/offers';
-import {Box, Container} from '@material-ui/core';
+import {Box, 
+  Container
+} from '@material-ui/core';
+
+
+
 const OffersPage = () => (
  <Box
  sx={{
@@ -11,7 +16,11 @@ const OffersPage = () => (
  }}
  >
    <Container maxWidth={false}>
-     <OffersListToolbar/>
+     <OffersListToolbar 
+     sx={{
+       py:1
+     }}
+     ></OffersListToolbar>
      <OfferListResult offerlist={offers}/>
    </Container>
  </Box>

@@ -1,19 +1,15 @@
 import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  TextField,
-  InputAdornment,
-  SvgIcon,
-  Select,
-  MenuItem,
-  InputLabel
+    Box,
+    Button,
+    InputLabel,
+    Select,
+    MenuItem,
+    Card,
+    CardContent
 } from '@material-ui/core';
-import { Search as SearchIcon } from 'react-feather';
 
-const PrelandListToolbar = (props) => (
-  <Box {...props}>
+const OffersListToolbar=(props)=>(
+<Box {...props}>
     <Box
       sx={{
         display: 'flex',
@@ -23,9 +19,9 @@ const PrelandListToolbar = (props) => (
       <Button
         color="primary"
         variant="contained"
-        href='/app/addpreland'
+        href='/addoffer'
       >
-        Add preland
+        Add offer
       </Button>
     </Box>
     <Box sx={{ mt: 3 }}>
@@ -49,5 +45,4 @@ const PrelandListToolbar = (props) => (
     </Box>
   </Box>
 );
-
-export default PrelandListToolbar;
+export default OffersListToolbar;
