@@ -6,6 +6,10 @@ import DashboardLayout from 'src/layouts/DashboardLayout';
 
 const routes = [
   {
+    path:'',
+    element: <Login />
+  },
+  {
     path: 'app',
     element: <DashboardLayout />,
     children: [
@@ -20,7 +24,9 @@ const routes = [
       { path: 'login', element: <Login /> },
       
     ]
-  }
+  } 
 ];
+
+
 
 export default routes;

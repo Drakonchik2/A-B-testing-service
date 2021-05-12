@@ -28,7 +28,7 @@ const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
         </RouterLink>
         <Box sx={{ flexGrow: 1 }} />
         <Hidden lgDown>
-          <IconButton color="inherit">
+          <IconButton color="inherit" href="/login">
             <InputIcon />
           </IconButton>
         </Hidden>

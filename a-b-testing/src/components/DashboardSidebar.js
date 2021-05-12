@@ -19,7 +19,8 @@ import {
   ShoppingBag as ShoppingBagIcon,
   User as UserIcon,
   UserPlus as UserPlusIcon,
-  Users as UsersIcon
+  Users as UsersIcon,
+  PlusSquare as PlusSquareIcon
 } from 'react-feather';
 import NavItem from 'src/components/NavItem';
 
@@ -31,13 +32,8 @@ const items = [
   },
   {
     href: '/app/addpreland',
-    icon: BarChartIcon,
+    icon: PlusSquareIcon,
     title: 'Add preland'
-  },
-  {
-    href: '/login',
-    icon: LockIcon,
-    title: 'Login'
   }
 ];
 
