@@ -8,74 +8,89 @@ import {
   SvgIcon,
   Select,
   MenuItem,
-  InputLabel
+  InputLabel,
+  Grid
 } from '@material-ui/core';
 import { Search as SearchIcon } from 'react-feather';
 import { Formik } from 'formik';
 import {useState} from 'react';
 
 function PrelandListToolbar(props){
-const [type, setType] = useState(0);
-const [visible, setVisble] = useState('hidden');
+const [type, setType] = useState(1);
+const [visible, setVisble] = useState('none');
 const handleChange = (event) => {
   setType(event.target.value);
   if (event.target.value == 5) 
   {
-    setVisble('visible');
+    setVisble('block');
   } else {
-    setVisble('hidden');
+    setVisble('none');
   }
 };
 
 
 return(
   <Box {...props}>
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'flex-end'
-      }}
-    >
-      <Button
-        color="primary"
-        variant="contained"
-        href="./addpreland"
-      >
-        Add preland
-      </Button>
-    </Box>
     <Box sx={{ mt: 3 }}>
       <Formik>
       <Card>
-        <CardContent
-          sx={{
-            display: 'flex'
-          }}
-        >
-          <Box sx={{ maxWidth: 500 }}>
-            <InputLabel id="label">Filter</InputLabel>
-            <Select
-            labelId="label"
-            id="select"
-            value={type}
-            onChange={handleChange}
-            >
-              <MenuItem value={0}>None</MenuItem>
-              <MenuItem value={1}>This month</MenuItem>
-              <MenuItem value={2}>Today</MenuItem>
-              <MenuItem value={3}>Last week</MenuItem>
-              <MenuItem value={4}>Yesterday</MenuItem>
-              <MenuItem value={5}>Custom</MenuItem>
-            </Select>
-          </Box>
-          <Box sx={{ ml: 3}} visibility={visible}>
-            <TextField
-              id="custom"
-              type='number'
-              label="Enter your duration"
-              defaultValue="1"
-            />
-          </Box>
+        <CardContent>
+          <Grid
+            container
+            direction="row"
+            alignItems="center"
+          >
+          <Grid item xs={8} display='flex'>
+            <Box sx={{ maxWidth: 500 }}>
+              <InputLabel id="label">Filter</InputLabel>
+              <Select
+                labelId="label"
+                id="select"
+                value={type}
+                onChange={handleChange}
+              >
+                <MenuItem value={1}>This month</MenuItem>
+                <MenuItem value={2}>Today</MenuItem>
+                <MenuItem value={3}>Last week</MenuItem>
+                <MenuItem value={4}>Yesterday</MenuItem>
+                <MenuItem value={5}>Period</MenuItem>
+              </Select>
+            </Box>
+            <Box sx={{ ml: 3}} display={visible}>
+              <TextField
+                id="from"
+                type='date'
+                label="Created from"
+                size='small'
+                InputLabelProps={{ shrink: true }}
+                sx={{ mr: 3, mt: 2}}
+              />
+            
+              <TextField
+                id="to"
+                type='date'
+                size='small'
+                InputLabelProps={{ shrink: true }}
+                label="Created to"
+                sx={{ mt: 2}}
+              />
+            </Box>
+          </Grid>
+            <Grid item xs={4}>
+              <Box
+                display="flex"
+                justifyContent="flex-end"
+              >
+                <Button
+                  color="primary"
+                  variant="contained"
+                  href="./addpreland"
+                >
+                Add preland
+                </Button>
+              </Box>
+            </Grid>
+          </Grid>
         </CardContent>
       </Card>
       </Formik>
