@@ -5,21 +5,11 @@ import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
 import DateRangePicker from '@material-ui/lab/DateRangePicker';
 import {
     Box,
-    Button,
-    Card,
-    CardContent,
-    TextField,
-    InputAdornment,
-    SvgIcon,
-    Select,
-    MenuItem,
-    InputLabel,
-    Grid
+    TextField
   } from '@material-ui/core';
 
 function CustomRangeDatePicker(){
     const [valu, setValu] = useState([null, null]);
-
 
 return(
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -37,7 +27,7 @@ return(
                 <TextField {...endProps} variant="standard" />
               </React.Fragment>
               )}
-            />
+        />
     </LocalizationProvider>
 
 );

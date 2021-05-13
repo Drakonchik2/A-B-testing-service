@@ -12,8 +12,11 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import InputIcon from '@material-ui/icons/Input';
 import Logo from './Logo';
+import { useDispatch } from 'react-redux';
+import { logout } from 'src/reducers/userReducer';
 
 const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
+  const dispatch = useDispatch();
 
   return (
     <AppBar
@@ -26,7 +29,11 @@ const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
         </RouterLink>
         <Box sx={{ flexGrow: 1 }} />
         <Hidden lgDown>
-          <IconButton color="inherit" href="/login">
+          <IconButton 
+            color="inherit" 
+            onClick = {() => dispatch(logout())}
+            href="/login"
+          >
             <InputIcon />
           </IconButton>
         </Hidden>

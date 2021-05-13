@@ -35,7 +35,6 @@ const handleChange = (event) => {
 return(
   <Box {...props}>
     <Box sx={{ mt: 3 }}>
-      <Formik>
       <Card>
         <CardContent>
           <Grid
@@ -80,7 +79,6 @@ return(
           </Grid>
         </CardContent>
       </Card>
-      </Formik>
     </Box>
   </Box>
 );
