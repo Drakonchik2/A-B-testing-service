@@ -11,17 +11,16 @@ import {
   InputLabel,
   Grid
 } from '@material-ui/core';
-import DateRangePicker from '@material-ui/lab/DateRangePicker';
 import { Search as SearchIcon } from 'react-feather';
 import { Formik } from 'formik';
 import { useState } from 'react';
 import React from 'react';
+import CustomRangeDatePicker from 'src/components/CustomRangeDatePicker';
 
 
 function PrelandListToolbar(props){
 const [type, setType] = useState(1);
 const [visible, setVisble] = useState('none');
-const [valu, setValu] = useState([null, null]);
 const handleChange = (event) => {
   setType(event.target.value);
   if (event.target.value == 5) 
@@ -34,7 +33,6 @@ const handleChange = (event) => {
 
 
 return(
-  
   <Box {...props}>
     <Box sx={{ mt: 3 }}>
       <Formik>
@@ -62,21 +60,7 @@ return(
               </Select>
             </Box>
             <Box sx={{ ml: 3}} display={visible}>
-            <DateRangePicker
-              startText="Created from"
-              endText="Created to"
-              value={valu}
-              onChange={(newValu) => {
-              setValu(newValu);
-              }}
-              renderInput={(startProps, endProps) => (
-              <React.Fragment>
-                <TextField {...startProps} variant="standard" />
-                <Box sx={{ mx: 2 }}> - </Box>
-                <TextField {...endProps} variant="standard" />
-              </React.Fragment>
-              )}
-            />
+              <CustomRangeDatePicker />
             </Box>
           </Grid>
             <Grid item xs={4}>
@@ -99,7 +83,6 @@ return(
       </Formik>
     </Box>
   </Box>
-  
 );
 }
 export default PrelandListToolbar;
