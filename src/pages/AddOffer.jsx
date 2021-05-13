@@ -1,76 +1,66 @@
 import React, { useState, useEffect } from "react";
-import {Button, TextField, Box, Typography } from '@material-ui/core';
+import {Button, TextField, Box, Typography, Container } from '@material-ui/core';
 import typography from 'src/theme/typography';
-
-
-
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
+import { Helmet } from "react-helmet";
+import {Formik} from 'formik';
+import {post} from 'src/actions/requests';
 const AddOffer = () => {
-  const intialValues = { name: "", link: "" };
-
-  const [formValues, setFormValues] = useState(intialValues);
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const submit = () => {
-    console.log(formValues);
-  };
-
-  //input change handler
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
-
-  //form submission handler
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFormErrors(validate(formValues));
-    setIsSubmitting(true);
-  };
-
-  //form validation handler
-  const validate = (values) => {
-    let errors = {};
-
-    if (!values.name) {
-      errors.name = "Cannot be blank";
-    }
-
-    if (!values.link) {
-      errors.link = "Cannot be blank";
-    } 
-
-    return errors;
-  };
-
-  useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmitting) {
-      submit();
-    }
-  }, [formErrors]);
-
+  const navigate =useNavigate();
+  
   return (
-      <Box 
+    <>
+    <Helmet>
+        <title>Add offer</title>
+    </Helmet>
+    <Box 
       component="div"
       align='center'
       sx={{
-        py:3
+        py:3,
+        height: '100%'
       }}
       >
+      <Container>
+        <Formik
+          initialValues = {{ 
+            name: '',
+            link: '' 
+          }}
+          onSubmit={(values)=>{
+            post(values);
+            navigate('../offer',{replace:true});
+          }}
+        >
+          {({
+            errors,
+            handleBlur,
+            handleChange,
+            handleSubmit,
+            isSubmitting,
+            touched,
+            values
+          })=>(
+      <form onSubmit={handleSubmit} >
       <Typography 
       color='textPrimary'
       variant='h3'
       >
         Add new offer
       </Typography>
-      <form onSubmit={handleSubmit} noValidate>
+     
         <div className="form-row">
           <TextField 
           variant="outlined"
-          id="name" 
+          id="name"
+          name="name"
           label="Offer Name"
+          onChange={handleChange}
+          value={values.name}
           sx={{
-            my:1
+            my:1,
+            height: '100%'
           }}
           />
           
@@ -79,19 +69,32 @@ const AddOffer = () => {
           <TextField
           variant="outlined"
           id="link"
+          name="link"
           label="Offer Link"
+          
+          onChange={handleChange}
+          value={values.link}
           sx={{
-            my:1
+            my:1,
+            height: '100%'
           }}
           />
         </div>
         <div>
-          <Button variant="contained" color="primary" href="/offer">
+          <Button 
+          variant="contained" 
+          color="primary"
+          type="submit"
+          >
             Submit
           </Button>
         </div>
       </form>
-      </Box>
+      )}
+        </Formik>
+      </Container>
+    </Box>
+    </>
   );
 };
 

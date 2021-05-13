@@ -8,10 +8,21 @@ import AddOffer from 'src/pages/AddOffer';
 import DashboardLayout from 'src/components/DashboardLayout';
 const routes = [
   {
+    path: '',
+    element:<Login/>
+
+  },
+  {
+
+    
     path: 'app',
     element: <DashboardLayout />,
     children: [
-      
+      { path: 'prelands', element: <PrelandList /> },
+      { path: 'addpreland', element: <Addpreland /> },
+      { path: 'offer', element:<OffersPage/>},
+      { path: 'addoffer', element:<AddOffer/>},
+      { path: 'editoffer', element:<EditOffer/>}
 
     ]
   },
@@ -20,12 +31,7 @@ const routes = [
     path: '/',
     element: <MainLayout />,
     children: [
-      { path: 'login', element: <Login /> },
-      { path: 'prelands', element: <PrelandList /> },
-      { path: 'addpreland', element: <Addpreland /> },
-      { path: 'offer', element:<OffersPage/>},
-      { path: 'addoffer', element:<AddOffer/>},
-      { path: 'editoffer', element:<EditOffer/>}
+      { path: 'login', element: <Login /> }
     ]
   }
 ];

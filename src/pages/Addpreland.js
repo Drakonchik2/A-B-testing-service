@@ -7,10 +7,11 @@ import {
   Button,
   Container,
   TextField,
-  Typography
+  Typography,
+  Card,
+  CardContent,
 } from '@material-ui/core';
-import {authorisation} from 'src/actions/user';
-import { useDispatch } from 'react-redux';
+
 
 const Addpreland = () => {
   const navigate = useNavigate();
@@ -30,6 +31,8 @@ const Addpreland = () => {
         }}
       >
         <Container maxWidth="sm">
+          <Card sx={{pl:7, pr:7, pt:1, pb:1}}>
+            <CardContent>
           <Formik
             initialValues={{
               name: '',
@@ -39,7 +42,7 @@ const Addpreland = () => {
               postback: ''
             }}
             onSubmit={(values) => {
-              navigate('../customers', { replace: true });
+              navigate('../prelands', { replace: true });
             }}
           >
             {({
@@ -144,6 +147,8 @@ const Addpreland = () => {
               </form>
             )}
           </Formik>
+          </CardContent>
+          </Card>
         </Container>
       </Box>
     </>

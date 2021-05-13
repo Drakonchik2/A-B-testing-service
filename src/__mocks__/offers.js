@@ -1,8 +1,8 @@
 export default [
     {
         id: 1,
-        offerName: 'PogPogOffer',
-        offerLink: 'http://localhost:3000',
+        offerName: 'Offer1',
+        offerLink: 'url-link-1',
         views: 0,
         transition: 0,
         conversion: 0,
@@ -29,8 +29,8 @@ export default [
     },
     {
         id: 2,
-        offerName: 'PogPogOffer2',
-        offerLink: 'http://localhost:3000',
+        offerName: 'Offer2',
+        offerLink: 'url-link-2',
         views: 0,
         transition: 0,
         conversion: 0,

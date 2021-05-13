@@ -1,77 +1,65 @@
-
-import React, { useState, useEffect } from "react";
-import {Button, TextField, Box, Typography} from '@material-ui/core';
-
-
-
-const EditOffer = () => {
-  const intialValues = { name: "", link: "" };
-
-  const [formValues, setFormValues] = useState(intialValues);
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const submit = () => {
-    console.log(formValues);
-  };
-
-  //input change handler
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
-
-  //form submission handler
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFormErrors(validate(formValues));
-    setIsSubmitting(true);
-  };
-
-  //form validation handler
-  const validate = (values) => {
-    let errors = {};
-
-    if (!values.name) {
-      errors.name = "Cannot be blank";
-    }
-
-    if (!values.link) {
-      errors.link = "Cannot be blank";
-    } 
-
-    return errors;
-  };
-
-  useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmitting) {
-      submit();
-    }
-  }, [formErrors]);
-
+import React from "react";
+import {Button, TextField, Box, Typography, Container } from '@material-ui/core';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
+import { Helmet } from "react-helmet";
+import {Formik} from 'formik';
+import {patch} from 'src/actions/requests';
+const EditOffer = (param) => {
+  const navigate =useNavigate();
   return (
+    <>
+    <Helmet>
+        <title>Edit offer</title>
+    </Helmet>
     <Box 
-    component="div"
-    align='center'
-    sx={{
-      py:3
-    }}
-    >
-    <Typography 
-    color='textPrimary'
-    variant='h3'
-    
-    >
-      Edit offer
-    </Typography>
-      <form onSubmit={handleSubmit} noValidate>
+      component="div"
+      align='center'
+      sx={{
+        py:3,
+        height: '100%'
+      }}
+      >
+      <Container>
+        <Formik
+          initialValues = {{ 
+            name: '',
+            link: '' 
+          }}
+          onSubmit={(values)=>{
+            console.log(values);
+            patch(values);
+            navigate('../offer',{replace:true});
+          }}
+        >
+          {({
+            errors,
+            handleBlur,
+            handleChange,
+            handleSubmit,
+            isSubmitting,
+            touched,
+            values
+          })=>(
+      <form onSubmit={handleSubmit} >
+      <Typography 
+      color='textPrimary'
+      variant='h3'
+      >
+        Edit offer
+      </Typography>
+     
         <div className="form-row">
           <TextField 
           variant="outlined"
-          id="name" 
+          id="name"
+          name="name"
           label="Offer Name"
+          onChange={handleChange}
+          defaultValue={values.name=localStorage.getItem("name")}
           sx={{
-            my:1
+            my:1,
+            height: '100%'
           }}
           />
           
@@ -80,19 +68,32 @@ const EditOffer = () => {
           <TextField
           variant="outlined"
           id="link"
+          name="link"
           label="Offer Link"
+          disabled
+          onChange={handleChange}
+          defaultValue={values.link=localStorage.getItem("link")}
           sx={{
-            my:1
+            my:1,
+            height: '100%'
           }}
           />
         </div>
         <div>
-          <Button variant="contained" color="primary" href="/offer">
+          <Button 
+          variant="contained" 
+          color="primary"
+          type="submit"
+          >
             Submit
           </Button>
         </div>
       </form>
-      </Box>
+      )}
+        </Formik>
+      </Container>
+    </Box>
+    </>
   );
 };
 

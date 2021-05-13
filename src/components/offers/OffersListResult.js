@@ -16,6 +16,9 @@ import {
   } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import axios from 'axios';
+import {post,remove} from 'src/actions/requests';
+
 
 const OfferListResult=({offerlist, ...rest})=>{
     const [limit, setLimit]=useState(10);
@@ -78,14 +81,25 @@ const OfferListResult=({offerlist, ...rest})=>{
                         color ="primary" 
                         aria-label="Edit offer"
                         href='editoffer'
+                        onClick={()=>{
+                            console.log(offerlist.id)
+                            localStorage.setItem("link",offerlist.offerLink)
+                            localStorage.setItem("name",offerlist.offerName)
+                        }}
                         >
                             <EditIcon/>
                         </IconButton>
-                        <IconButton color ="primary" aria-label="Delete offer" href="#">
+                        <IconButton 
+                        color ="primary"
+                        aria-label="Delete offer"
+                        href="#"
+                        onClick={()=>{
+                            console.log(offerlist)
+                            remove(offerlist.id)
+                        }}>
                             <DeleteIcon/>
                         </IconButton>
                         <Button
-                        
                         href="/prelands"
                         >
                             Prelands
