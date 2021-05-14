@@ -51,3 +51,44 @@ export function getPrelands(values){
     .then(res=>console.log(res))
     .catch(err=>console.error(err))
 }
+
+export function patchpreland(values){
+  axios({
+    method: 'patch',
+    url:'https://jsonplaceholder.typicode.com/users/1',
+    data:{
+      "prelandName": values.name,
+      "prelandShowing": values.showing,
+      "prelandUniques": values.uniques,
+      "prelandUnique": values.unique,
+      "prelandPostback": values.postback
+    }
+  })
+  .then(res=>console.log(res))
+  .catch(err=>console.error(err))
+}
+
+export function removepreland(values){
+  axios({
+      method: 'delete',
+      url:'https://jsonplaceholder.typicode.com/users/1'
+  })
+  .then(res=>console.log(res))
+  .catch(err=>console.error(err))
+}
+
+export function postpreland(values) {
+  axios({
+    method:'post',
+    url:'https://jsonplaceholder.typicode.com/todos',
+    data:{
+      "prelandName": values.name,
+      "prelandShowing": values.showing,
+      "prelandUniques": values.uniques,
+      "prelandUnique": values.unique,
+      "prelandPostback": values.postback
+    }
+  })
+  .then(res=>console.log(res))
+  .catch(err=>console.error(err))
+}

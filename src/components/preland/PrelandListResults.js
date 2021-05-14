@@ -19,6 +19,7 @@ import {
 import getInitials from 'src/utils/getInitials';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import {removepreland} from 'src/actions/requests';
 
 const PrelandListResults = ({ prelands, ...rest }) => {
   const [selectedPrelandIds, setSelectedPrelandIds] = useState([]);
@@ -150,10 +151,28 @@ const PrelandListResults = ({ prelands, ...rest }) => {
                     {preland.distribution}
                   </TableCell>
                   <TableCell>
-                  <IconButton color="inherit">
-                      <EditOutlinedIcon color="primary" />
+                  <IconButton 
+                  color="inherit"
+                  href="./editpreland"
+                  onClick={()=>{
+                    console.log(preland.name)
+                    localStorage.setItem("name",preland.name)
+                    localStorage.setItem("showing",preland.showing)
+                    localStorage.setItem("uniques",preland.uniques)
+                    localStorage.setItem("transitions",preland.transitions)
+                    localStorage.setItem("unique",preland.unique)
+                    localStorage.setItem("distribution",preland.distribution)
+                }}
+                  >
+                      <EditOutlinedIcon 
+                      color="primary"/>
                     </IconButton>
-                    <IconButton color="inherit">
+                    <IconButton color="inherit"
+                        onClick={()=>{
+                        console.log(preland.name)
+                        removepreland(preland.name)
+                    }}
+                    >
                       <DeleteOutlineIcon color="secondary" />
                     </IconButton>
                   </TableCell>

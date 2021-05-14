@@ -4,6 +4,7 @@ import Login from 'src/pages/Login';
 import Addpreland from 'src/pages/Addpreland';
 import OffersPage from 'src/pages/OffersPage';
 import EditOffer from 'src/pages/EditOffer';
+import Editpreland from 'src/pages/Editpreland';
 import AddOffer from 'src/pages/AddOffer';
 import DashboardLayout from 'src/components/DashboardLayout';
 const routes = [
@@ -22,7 +23,8 @@ const routes = [
       { path: 'addpreland', element: <Addpreland /> },
       { path: 'offer', element:<OffersPage/>},
       { path: 'addoffer', element:<AddOffer/>},
-      { path: 'editoffer', element:<EditOffer/>}
+      { path: 'editoffer', element:<EditOffer/>},
+      { path: 'editpreland', element:<Editpreland />}
 
     ]
   },

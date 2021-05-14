@@ -100,7 +100,7 @@ const OfferListResult=({offerlist, ...rest})=>{
                             <DeleteIcon/>
                         </IconButton>
                         <Button
-                        href="/prelands"
+                        href="./prelands"
                         >
                             Prelands
                         </Button>

@@ -11,10 +11,10 @@ import {
   Card,
   CardContent,
 } from '@material-ui/core';
-import {postpreland} from 'src/actions/requests';
+import {patchpreland} from 'src/actions/requests';
 
 
-const Addpreland = () => {
+const Editpreland = () => {
   const navigate = useNavigate();
 
   return (
@@ -43,8 +43,9 @@ const Addpreland = () => {
               postback: ''
             }}
             onSubmit={(values) => {
-              postpreland(values);
-              navigate('../prelands', { replace: true });
+                console.log(values);
+                patchpreland(values);
+                navigate('../prelands', { replace: true });
             }}
           >
             {({
@@ -88,7 +89,7 @@ const Addpreland = () => {
                   onBlur={handleBlur}
                   onChange={handleChange}
                   type="text"
-                  value={values.name}
+                  defaultValue={values.name=localStorage.getItem("name")}
                   variant="outlined"
                 />
                 <TextField
@@ -99,7 +100,7 @@ const Addpreland = () => {
                   onBlur={handleBlur}
                   onChange={handleChange}
                   type="text"
-                  value={values.link}
+                  defaultValue={values.showing=localStorage.getItem("showing")}
                   variant="outlined"
                 />
                 <TextField
@@ -110,7 +111,7 @@ const Addpreland = () => {
                   onBlur={handleBlur}
                   onChange={handleChange}
                   type="text"
-                  value={values.uniques}
+                  defaultValue={values.uniques=localStorage.getItem("uniques")}
                   variant="outlined"
                 />
                 <TextField
@@ -121,7 +122,7 @@ const Addpreland = () => {
                   onBlur={handleBlur}
                   onChange={handleChange}
                   type="text"
-                  value={values.unique}
+                  defaultValue={values.unique=localStorage.getItem("unique")}
                   variant="outlined"
                 />
                 <TextField
@@ -132,7 +133,7 @@ const Addpreland = () => {
                   onBlur={handleBlur}
                   onChange={handleChange}
                   type="text"
-                  value={values.postback}
+                  defaultValue={values.postback=localStorage.getItem("postback")}
                   variant="outlined"
                 />
                 <Box sx={{ py: 2 }}>
@@ -157,4 +158,4 @@ const Addpreland = () => {
   );
 };
 
-export default Addpreland;
+export default Editpreland;
