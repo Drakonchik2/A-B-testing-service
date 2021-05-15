@@ -84,12 +84,18 @@ WSGI_APPLICATION = 'AB_Service.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'ab_service',
-    }
+        'default': {
+                    'ENGINE': 'djongo',
+                    'CLIENT':
+                        {
+                            'host': "mongodb+srv://simple_user:useruser@cluster0.yhwgu.mongodb.net/test",
+                            'username': "simple_user",
+                            'password': "useruser",
+                            'name': "ab_service_db",
+                            "authMechanism": "SCRAM-SHA-1",
+                        },
+                    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
