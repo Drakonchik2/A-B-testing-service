@@ -1,1 +1,0 @@
-web: gunicorn AB_Service.wsgi:application --log-file -
