@@ -1,4 +1,4 @@
-/ab_service/__pycache__/
+/.vscode/
+/testing_project/abservice/__pycache__/
+/testing_project/abservice/migrations/__pycache__/
 /venv/
-/Project_My/__pycache__/
-/ab_service/migrations/__pycache__
