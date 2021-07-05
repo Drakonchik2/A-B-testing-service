@@ -13,7 +13,7 @@ class PrealandAdmin(admin.ModelAdmin):
 
 class PrealandInline(admin.TabularInline):
     model = Prealand
-
+    readonly_fields = ['date_time', 'uniqueness', 'views', 'transition', 'conversion']
 
 class OfferAdmin(admin.ModelAdmin):
     list_display = ('name', 'date_time')
@@ -22,6 +22,7 @@ class OfferAdmin(admin.ModelAdmin):
     search_fields = ['name']
     readonly_fields = ['date_time', 'views', 'transition', 'conversion']
     inlines = [PrealandInline]
+    
 
 
 admin.site.register(Offer, OfferAdmin)
