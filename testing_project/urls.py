@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.sessions.models import Session
+
+Session.objects.all().delete()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
