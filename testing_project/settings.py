@@ -11,22 +11,32 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import django_heroku
-import dj_database_url
-
-
+import json
+from django.core.exceptions import ImproperlyConfigured
+   
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+with open(os.path.join(BASE_DIR, 'secrets.json')) as secrets_file:
+    secrets = json.load(secrets_file)
+ 
+def get_secret(setting, secrets=secrets):
+    """Get secret setting or fail with ImproperlyConfigured"""
+    try:
+        return secrets[setting]
+    except KeyError:
+        raise ImproperlyConfigured("Set the {} setting".format(setting))
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2vx4yl8c%of@)aqujebytg+d=rkdpn1_7yw$dx&j@1bx_+oayz'
+SECRET_KEY = get_secret('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True 
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True) == 'False')
 #bool( os.environ.get('DJANGO_DEBUG', False) )
 ALLOWED_HOSTS = ['prealandtestapp.herokuapp.com', '127.0.0.1']
 
@@ -44,7 +54,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -83,9 +92,9 @@ DATABASES = {
                     'ENGINE': 'djongo',
                     'CLIENT':
                         {
-                            'host': "mongodb+srv://simple_user:useruser@cluster0.yhwgu.mongodb.net/test",
-                            'username': "simple_user",
-                            'password': "useruser",
+                            'host': get_secret('DB_HOST'),
+                            'username': get_secret('DB_LOGIN'),
+                            'password': get_secret('DB_PASSWORD'),
                             'name': "practice",
                             "authMechanism": "SCRAM-SHA-1",
                         },
@@ -131,26 +140,11 @@ USE_TZ = True
 
 #Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
-STATIC_ROOT  =   os.path.join(PROJECT_ROOT, 'staticfiles')
-STATIC_URL = '/static/'
 
+STATIC_URL = '/static/'
+STATIC_ROOT  =   os.path.join(BASE_DIR, 'staticfiles/')
 # Extra lookup directories for collectstatic to find static files
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
-#  Add configuration for static files storage using whitenoise
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
-CORS_ORIGIN_ALLOW_ALL = True
-
-SITE_ID = 1
-
-CSRF_COOKIE_NAME = "csrftoken"
-
-ACCOUNT_EMAIL_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = 'username'
-ACCOUNT_EMAIL_VERIFICATION = 'none'
-import django_heroku
-django_heroku.settings(locals())
