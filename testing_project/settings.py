@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import dj_database_url
 import json
 from django.core.exceptions import ImproperlyConfigured
    
@@ -147,4 +148,3 @@ STATIC_ROOT  =   os.path.join(BASE_DIR, 'staticfiles/')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-
