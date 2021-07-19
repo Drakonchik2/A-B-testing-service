@@ -1,0 +1,7 @@
+/.vscode/
+/abservice/__pycache__/
+/testing_project/__pycache__/
+venv/
+staticfiles/
+/secrets.json
+/abservice/migrations/__pycache__/
